@@ -29,14 +29,14 @@ image:
 color:               '#4f86aa'
 
 # The font used for headings. Expects a string that is a valid CSS font-family value.
-font_heading:        "'Noto Serif KR', 'Sans-serif'"
+font_heading:        "'Nanum Gothic', 'Sans-serif'"
 
 # The text font. Expects a string that is a valid CSS font-family value.
-font:                "'Noto Serif KR', 'Sans-serif'"
+font:                "'Nanum Gothic', 'Sans-serif'"
 
 # The string encoding what fonts to fetch from Google Fonts.
 # See: https://qwtel.com/hydejack/docs/configuration/
-google_fonts:        "Nanum+Gothic"
+google_fonts:        Nanum Gothic
 
 # If you do not use a Google Fonts, uncomment the line below
 # no_google_fonts:     true
