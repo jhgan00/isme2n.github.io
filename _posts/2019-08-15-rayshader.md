@@ -6,7 +6,7 @@ categories: project
 tags: [heatisland, r]
 ---
 
-> R `rayshader`를 활용한 도시 데이터 시각화 샘플
+R `rayshader`를 활용한 도시 데이터 시각화 샘플
 
 ## 0. Summary
 

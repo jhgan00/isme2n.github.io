@@ -7,7 +7,8 @@ isme2n:
 
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
-  about:             |
+  about:
+    간정현 <br />
     데이터 사이언티스트(이고 싶은 것)
 
   # This photo will be used in the about section

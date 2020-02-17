@@ -8,6 +8,8 @@ body, main {
   /* Prevent side-scrolling on mobile */
   position: relative;
   overflow-x: hidden;
+  width: 100%;
+  min-width: 1000px;
 
   // -webkit-text-size-adjust: 100%;
   //     -ms-text-size-adjust: 100%;

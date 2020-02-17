@@ -22,7 +22,7 @@
   {% endunless %}
   {% endfor %}
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  
   {% unless include.excerpt %}
   <div class="markdown-body">
 
@@ -31,53 +31,16 @@
     <br />{% elsif tag.header-img %}
     <div class="head-image"><img src="{{ site.url }}/assets/{{ tag.header-img }}" /></div>
     <br />{% endif %} -->
-    <style>
-      .myAd1190 {
-        width: 48%;
-        height: 280px;
-      }
-
-      .myAd1290 {
-        width: 48%;
-        height: 280px;
-      }
-
-      @media(max-width: 800px) {
-        .myAd1190 {
-          display: none;
-        }
-
-        .myAd1290 {
-          width: 98%;
-        }
-      }
-
-      .row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 300px;
-      }
-
-      .row-center {
-        display: flex;
-        justify-content: center;
-        height: 258px;
-      }
-    </style>
     
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    
+    
 
     <br />
     {{ post.content }}
     <br />
     <br />
   </div>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  
   {% else %}
   {{ post.excerpt }}
   <p class="read-more"><a class="heading" href="{{ post.url | relative_url }}" data-flip="title">Continue reading </a>
