@@ -59,7 +59,7 @@ isme2n:
     # stumbleupon:     <username>
     # paypal:          <username>
     email:           mailto:jhgan00@gmail.com
-    rss:             https://jhgan00.github.io/feed.xml
+    # rss:             https://jhgan00.github.io/feed.xml
 
 # Another author
 # mdo:
