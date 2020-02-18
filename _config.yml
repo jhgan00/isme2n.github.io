@@ -30,14 +30,14 @@ image:
 color:               '#4f86aa'
 
 # The font used for headings. Expects a string that is a valid CSS font-family value.
-font_heading:        "'Ubuntu', 'Sans-serif'"
+font_heading:        "'Noto Sans KR', 'Sans-serif'"
 
 # The text font. Expects a string that is a valid CSS font-family value.
-font:                "'Ubuntu', 'Sans-serif'"
+font:                "'Noto Sans KR', 'Sans-serif'"
 
 # The string encoding what fonts to fetch from Google Fonts.
 # See: https://qwtel.com/hydejack/docs/configuration/
-google_fonts:        Ubuntu
+google_fonts:        Noto Sans KR
 
 # If you do not use a Google Fonts, uncomment the line below
 # no_google_fonts:     true
