@@ -3,7 +3,7 @@ layout: post
 title: "[HeatIsland] Landsat 데이터 다운로드"
 categories: project
 tags: [heatisland, python]
-css: ['typo.css']
+comments: true
 ---
 
 구글 클라우드 스토리지가 이미 랜샛 데이터를 제공하고 있어서, 이를 통해 필요한 데이터를 쿼리하고 다운로드하는 과정을 프로그램화해보자.

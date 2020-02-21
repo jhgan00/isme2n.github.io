@@ -3,7 +3,7 @@ layout: post
 title: "[HeatIsland] 디지털경영학회 논문 투고"
 categories: project
 tags: heatisland
-css: /assets/css/typo.css
+comments: true
 ---
 
 이광춘 교수님과 한국 디지털경영학회의 도움으로 프로젝트 결과를 논문으로 써내게 되었습니다. 다시 한 번 감사의 말씀을 드립니다. 논문은 [여기](http://kasdba.or.kr/html/sub0403.html?pageNm=article&journal=1&code=363983&issue=27225&Page=1&year=2019&searchType=title&searchValue=%EC%97%B4%EC%84%AC)에서 확인하실 수 있습니다. 
