@@ -48,7 +48,7 @@ google_analytics:    UA-92346434-1
 
 # Setting a disqus shortname will enable the comment section on pages with `comments: true` in the front matter
 
-disqus_shortname: 'derini-beulrogeu'
+disqus_shortname: derini
 
 # This text will appear in the footer of every page. Markdown enabled.
 copyright:           '&copy; 2017. by isme2n'
