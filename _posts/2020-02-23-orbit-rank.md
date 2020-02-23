@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "순위가 잘 나와서 기분 좋은 사람"
-categories: project
-tags: heatisland
+categories: blog
 comments: true
 ---
 
