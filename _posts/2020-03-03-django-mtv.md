@@ -43,10 +43,10 @@ SQL의 테이블 정의와 굉장히 유사하기 때문에 이것을 파이썬 
 
 모든 장고의 구성요소들이 그러하지만, 뷰와 템플릿은 특히 떼어놓고 설명할 수 없는 영역입니다. 우선 템플릿은 말 그대로 하나의 웹 페이지가 갖는 양식이며, 장고의 템플릿 태그(`{%%}`, `{{}}`)를 포함하는 `html` 파일들입니다. 장고는 사용자의 요청에 따라 템플릿 파일 안에 적절한 컨텍스트 변수들을 대입하여 완성된 문서를 사용자에게 보여줍니다. 아래는 블로그 게시물 아카이브를 보여주는 템플릿 예시입니다.
 
-```html
+```
 {% extends "blog/base.html" %}
 
-{% block title%}blogpost_archive.html{% endblock %}
+{% block title %}blogpost_archive.html{% endblock %}
 
 {% block content %}
 <h3>Post Archives until {% now "N d, Y"%}</h3>
@@ -65,7 +65,6 @@ SQL의 테이블 정의와 굉장히 유사하기 때문에 이것을 파이썬 
 		{% endfor %}
 	</ul>
 </div>
-
 {% endblock %}
 ```
 
