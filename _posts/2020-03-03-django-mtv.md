@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Python] Django 개발의 기초: MTV"
-categories: [docs]
+categories: [doc]
 tags: [python, django]
 comments: true
 ---
