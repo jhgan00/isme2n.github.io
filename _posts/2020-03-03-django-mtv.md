@@ -49,7 +49,7 @@ SQL의 테이블 정의와 굉장히 유사하기 때문에 이것을 파이썬 
 <div class="hr"></div>
 
 {% for date in date_list %}
-<a href="{% url 'blog:post_archive_year' date|date:'Y' %}" class="btn btn-outline-primary btn-sm mx-1">{{ date|date:"Y" }}</a>
+<a href="{% url 'blog:post_archive_year' date|date:'Y' %}{% endurl %}" class="btn btn-outline-primary btn-sm mx-1">{{ date|date:"Y" }}</a>
 {% endfor %}
 
 <br><br>
