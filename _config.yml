@@ -128,3 +128,18 @@ compress_html:
 
 sass:
   style:             compressed
+
+
+## Default Front Matter 
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+      sitemap :
+        changefreq : daily
+        priority : 1.0
+      
