@@ -81,16 +81,13 @@ class PostDV(DetailView):
 
 ## 4. template file
 
-마지막으로 템플릿 파일에 댓글 폼과 제출 버튼을 표시하고, 해당 게시물에 달린 댓글 목록을 출력해줍니다. widget_tweaks 앱을 추가로 사용하였습니다.
+마지막으로 템플릿 파일에 댓글 폼과 제출 버튼을 표시하고, 해당 게시물에 달린 댓글 목록을 출력해줍니다. widget_tweaks 앱을 추가로 사용하였습니다. 댓글 내용을 표시하는 템플릿 태그에는 linebreaks 필터를 사용해서 줄바꿈이 가능하도록 만들어줍니다.
 
 ```
 {% raw %}
-<h4>Comments</h4>
-<div class="hr"></div>
-
 <div>
 	<form action="." method="post">{% csrf_token %} {{ form.as_p }}
-	<input type="submit" value="Post as {{ user }}" class="btn btn-sm btn-info" style="float:right;">
+	<input type="submit" name="comment" value="Post as {{ user }}" class="btn btn-sm btn-info" style="float:right;">
 	</form>
 	<br><br>
 </div>
@@ -104,7 +101,7 @@ class PostDV(DetailView):
 					<span>{{ comment.owner }}</span>
 					<span class="post-date">{{ comment.modify_dt|timesince }} ago</span>
 				</header>
-				<body>{{ comment.content }}</body>
+				<body>{{ comment.content|linebreaks }}</body>
 			</div>
 			<br/>
 		</li>
