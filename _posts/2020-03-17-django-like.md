@@ -35,16 +35,15 @@ class Like(models.Model):
 
 ```python
 def post(self, request, *args, **kwargs):
-		if 'comment' in self.request.POST:
-			... # 생략
+	if 'comment' in self.request.POST:
+		... # 생략
 
-		else:
-			post = self.get_object()
-			post_like, post_like_created = post.like_set.get_or_create(user=request.user)
-			if not post_like_created:
-				post_like.delete()
-			return redirect(post.get_absolute_url())
-
+	else:
+		post = self.get_object()
+		post_like, post_like_created = post.like_set.get_or_create(user=request.user)
+		if not post_like_created:
+			post_like.delete()
+		return redirect(post.get_absolute_url())
 ```
 
 ## 3. 템플릿 파일
