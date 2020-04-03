@@ -1,9 +1,14 @@
-# Tensorflow Tutorial
+---
+layout: post
+title: "[Python] 텐서플로 2.0 입문자 튜토리얼"
+categories: [doc]
+tags: [python, keras, tensorflow]
+comments: true
+---
 
-텐서플로 공식 사이트의 초보자용 튜토리얼을 따라해봅니다. 공식 홈페이지에서도 복잡한 텐서플로 코드가 아닌 케라스 API를 사용하는 튜토리얼을 제공하고 있네요! 
+개강하고 과제에 치여서 살다가, 간만에 시간이 생겼네요 ㅎㅎ 텐서플로 2.0 공식 사이트의 초보자용 튜토리얼을 가볍게 따라해봅니다. 공식 홈페이지에서도 복잡한 텐서플로 코드가 아닌 케라스 API를 사용하는 튜토리얼을 제공하고 있네요! 
 
 ## 1. 기본 이미지 분류
-
 
 ```python
 import tensorflow as tf
@@ -23,20 +28,7 @@ print(tf.__version__)
 ```python
 fashin_mnist = keras.datasets.fashion_mnist
 (train_image, train_labels), (test_image, test_labels) = fashin_mnist.load_data()
-```
 
-    Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
-    32768/29515 [=================================] - 0s 1us/step
-    Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
-    26427392/26421880 [==============================] - 1s 0us/step
-    Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
-    8192/5148 [===============================================] - 0s 0us/step
-    Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
-    4423680/4422102 [==============================] - 0s 0us/step
-
-
-
-```python
 print(
     "xtrain_shape: ", train_image.shape, "\n",
     "xtest_shape: ", test_image.shape, "\n",
@@ -60,7 +52,7 @@ plt.grid(False)
 ```
 
 
-![png](output_6_0.png)
+![png](/assets/img/docs/output_6_0.png)
 
 
 
@@ -89,7 +81,7 @@ for i in range(25):
 ```
 
 
-![png](output_10_0.png)
+![png](/assets/img/docs/output_10_0.png)
 
 
 ### 1.3. 모델 구성
@@ -280,7 +272,7 @@ model.summary()
 
     Model: "sequential_2"
     _________________________________________________________________
-    Layer (type)                 Output Shape              Param #   
+    Layer (type)                 /assets/img/docs/Output Shape              Param #   
     =================================================================
     keras_layer_2 (KerasLayer)   (None, 20)                400020    
     _________________________________________________________________
@@ -487,7 +479,7 @@ model.summary()
 
     Model: "sequential_3"
     _________________________________________________________________
-    Layer (type)                 Output Shape              Param #   
+    Layer (type)                 /assets/img/docs/Output Shape              Param #   
     =================================================================
     embedding_1 (Embedding)      (None, None, 16)          160000    
     _________________________________________________________________
@@ -843,7 +835,7 @@ model.summary()
 
     Model: "sequential_6"
     _________________________________________________________________
-    Layer (type)                 Output Shape              Param #   
+    Layer (type)                 /assets/img/docs/Output Shape              Param #   
     =================================================================
     dense_15 (Dense)             (None, 64)                704       
     _________________________________________________________________
@@ -925,7 +917,7 @@ plot_history(history)
 ```
 
 
-![png](output_68_0.png)
+![png](/assets/img/docs/output_68_0.png)
 
 
 훈련 과정에서 약 100 에포크 이후에는 모델 성능의 향상이 거의 없는 것 같으므로 early stopping을 사용해봅니다.
@@ -948,7 +940,7 @@ plot_history(history)
     ................................................
 
 
-![png](output_70_1.png)
+![png](/assets/img/docs/output_70_1.png)
 
 
 
@@ -976,7 +968,7 @@ _ = plt.plot([-100, 100], [-100, 100])
 ```
 
 
-![png](output_72_0.png)
+![png](/assets/img/docs/output_72_0.png)
 
 
 
@@ -988,5 +980,5 @@ _ = plt.ylabel("Count")
 ```
 
 
-![png](output_73_0.png)
+![png](/assets/img/docs/output_73_0.png)
 
