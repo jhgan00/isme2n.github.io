@@ -52,8 +52,7 @@ plt.grid(False)
 ```
 
 
-![png](/assets/img/docs/output_6_0.png)
-
+![](/assets/img/docs/output_6_0.png)
 
 
 ```python
@@ -81,7 +80,7 @@ for i in range(25):
 ```
 
 
-![png](/assets/img/docs/output_10_0.png)
+![](/assets/img/docs/output_10_0.png)
 
 
 ### 1.3. 모델 구성
@@ -917,7 +916,7 @@ plot_history(history)
 ```
 
 
-![png](/assets/img/docs/output_68_0.png)
+![](/assets/img/docs/output_68_0.png)
 
 
 훈련 과정에서 약 100 에포크 이후에는 모델 성능의 향상이 거의 없는 것 같으므로 early stopping을 사용해봅니다.
@@ -940,7 +939,7 @@ plot_history(history)
     ................................................
 
 
-![png](/assets/img/docs/output_70_1.png)
+![](/assets/img/docs/output_70_1.png)
 
 
 
@@ -968,7 +967,7 @@ _ = plt.plot([-100, 100], [-100, 100])
 ```
 
 
-![png](/assets/img/docs/output_72_0.png)
+![](/assets/img/docs/output_72_0.png)
 
 
 
@@ -980,5 +979,5 @@ _ = plt.ylabel("Count")
 ```
 
 
-![png](/assets/img/docs/output_73_0.png)
+![](/assets/img/docs/output_73_0.png)
 
