@@ -29,7 +29,7 @@ x, y = StandardScaler().fit_transform(boston['data']), boston['target'].reshape(
 선형회귀모형 클래스를 만들고 입력을 받아서 출력을 내보내는 기능까지만 구현해보겠습니다. 인스턴스를 생성하면 입력 데이터의 사이즈를 받아서 가중치 행렬과 편향을 초기화합니다. 가중치는 랜덤으로, 편향은 0으로 초기화하였습니다. 다음으로 예측을 내보내는 `predict` 메소드를 구현해봅니다. 예측은 단순히 입력과 가중치의 곱에 편향을 더해서 내보내부는 선형 결합입니다.
 
 
-$$Y = XW + b \space \space \\ (N, 1) = ( N, p) \times (p, 1)$$
+$$Y = XW + b \space \space$$
 
 
 
@@ -138,7 +138,7 @@ x, y = StandardScaler().fit_transform(iris['data']), pd.get_dummies(iris['target
 
     각 클래스별 확률을 출력해야 하므로 우선 가중치 행렬을 확장해줍니다. 이렇게 해서 데이터마다 3개의 클래스 각각 확률을 출력할 수 있습니다.
 
-$$Y = softmax(WX + B) \\ (N, 3) = softmax((N, p) \times (p, 3))$$
+$$Y = softmax(WX + b)$$
 
 2. predict
 
