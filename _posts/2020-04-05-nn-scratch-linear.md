@@ -52,13 +52,12 @@ class LinearRegression:
 
     선형회귀 클래스 안에 경사하강을 위한 gradientDescent 메소드를 별도로 구현하였습니다. 학습을 위해 필요한 데이터와 학습률을 인자로 받습니다. 먼저 출력 `yhat`을 계산해줍니다. 다음으로 가중치 업데이트를 위한 미분을 계산합니다. 체인 룰을 사용해서 간단하게 계산해줄 수 있습니다. 이후 역전파를 다룰 때에도 체인 룰이 중요하기 때문에 한번에 미분을 계산할 수 있으신 분들도 체인 룰로 계산해보시는걸 추천드립니다!
 
+    
     $$
-    \begin{multline}
     L = \frac{1}{2} (y-\hat{y})^2 \\
     \frac{L}{\partial \hat{y}} = -(y-\hat{y}) \\
     \frac{\partial \hat{y}}{\partial w_i} = x_i \\
-    \frac{\partial \hat{y}}{\partial b} = 1 \\
-    \end{multline}
+    \frac{\partial \hat{y}}{\partial b} = 1
     $$
 
 ```python
