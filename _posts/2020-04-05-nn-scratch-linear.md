@@ -6,11 +6,11 @@ tags: [python]
 comments: true
 ---
 
-넘파이를 사용해서 선형 모형부터 역전파 알고리즘까지 차례차례 구현해봅니다!
+넘파이를 사용해서 선형 모형부터 역전파 알고리즘까지 차례차례 구현해봅니다! 간만에 시간이 생겨서 기초적인 신경망 이론을 복습하다가 [바람의 머신러닝](https://www.youtube.com/watch?v=xgT9xp977EI)이라는 강의를 우연히 보게 되었는데, 기존의 수식적인 접근에 더해 계산 그래프를 활용하여 상당히 쉽게 설명을 잘 해주셨습니다. 특히나 좋은 점은 목소리가 굉장히 좋으세요 ㅎㅎ 개인적으로는 역전파 부분만 시청했는데 아예 신경망을 처음 접하시는 분들이라면 모든 강의 다 들어보셔도 좋을 것 같습니다! 
 
 ## 1. 회귀모형: 선형 모델과 경사하강
 
-우선 입력을 받아서 선형 출력을 내보내는 모델을 만들어봅시다. 사용할 데이터셋은 scikit learn의 보스턴 데이터이고, 스케일링만 해주었습니다.
+우선 경사하강이라는 알고리즘의 이해를 위해서 간단한 선형 모형부터 시작해봅시다(선형 모형에 대한 설명은 생략합니다). 입력을 받아서 선형 출력을 내보내는 모델을 만들어보는 것이 목표입니다. 사용할 데이터셋은 scikit learn의 보스턴 데이터이고, 스케일링만 해주었습니다. 학습 데이터와 평가 데이터를 따로 분리하지는 않았습니다. 학습 과정에서 훈련 오차를 출력하기 위해서 `mse` 함수를 정의합니다.
 
 
 ```python
@@ -24,20 +24,15 @@ np.random.seed(0)
 
 boston = load_boston()
 x, y = StandardScaler().fit_transform(boston['data']), boston['target'].reshape((-1, 1))
-```
 
-선형회귀모형 클래스를 만들고 입력을 받아서 출력을 내보내는 기능까지만 구현해보겠습니다. 인스턴스를 생성하면 입력 데이터의 사이즈를 받아서 가중치 행렬과 편향을 초기화합니다. 가중치는 랜덤으로, 편향은 0으로 초기화하였습니다. 다음으로 예측을 내보내는 `predict` 메소드를 구현해봅니다. 예측은 단순히 입력과 가중치의 곱에 편향을 더해서 내보내부는 선형 결합입니다.
-
-
-$$Y = XW + b \space \space$$
-
-
-
-
-```python
 def mse(y, yhat):
     return np.sqrt(np.power(y - yhat, 2).mean())
 ```
+
+그러면 선형모형 클래스를 만들어 입력을 받아서 출력을 내보내는 기능까지만 구현해보겠습니다. `__init__` 메소드에서는 인스턴스를 생성하면 입력 데이터의 사이즈를 받아서 가중치 행렬과 편향을 초기화합니다. 가중치는 랜덤으로, 편향은 0으로 초기화하였습니다. 다음으로 예측을 내보내는 `predict` 메소드를 구현해봅니다. 예측은 단순히 입력과 가중치의 곱에 편향을 더해서 내보내부는 선형 결합입니다. 아직 가중치와 편향의 업데이트를 실행하는 경사하강 알고리즘은 구현하지 않았습니다.
+
+
+$$Y = XW + b$$
 
 
 ```python
@@ -55,8 +50,32 @@ class LinearRegression:
 
 1. gradientDescent
 
-    경사하강을 위한 gradientDescent 메소드를 별도로 구현하였습니다. 학습을 위해 필요한 데이터와 학습률을 인자로 받습니다. 먼저 출력 `yhat`을 계산해줍니다. 다음으로 가중치 업데이트를 위한 미분을 계산합니다. 에러를 $$\frac{1}{2}MSE$$ 로 놓고 미분을 계산한 다음 모든 케이스의 평균을 구해줍니다. 이렇게 구한 그래디언트를 학습률에 곱해 원래 파라미터들에 더해주면 끝입니다! 중간중간 학습 진행 상황을 출력하기 위해 출력값 `yhat`을 반환합니다.
+    선형회귀 클래스 안에 경사하강을 위한 gradientDescent 메소드를 별도로 구현하였습니다. 학습을 위해 필요한 데이터와 학습률을 인자로 받습니다. 먼저 출력 `yhat`을 계산해줍니다. 다음으로 가중치 업데이트를 위한 미분을 계산합니다. 체인 룰을 사용해서 간단하게 계산해줄 수 있습니다. 이후 역전파를 다룰 때에도 체인 룰이 중요하기 때문에 한번에 미분을 계산할 수 있으신 분들도 체인 룰로 계산해보시는걸 추천드립니다!
 
+    $$
+    \begin{multline}
+    L = \frac{1}{2} (y-\hat{y})^2 \\
+    \frac{L}{\partial \hat{y}} = -(y-\hat{y}) \\
+    \frac{\partial \hat{y}}{\partial w_i} = x_i \\
+    \frac{\partial \hat{y}}{\partial b} = 1 \\
+    \end{multline}
+    $$
+
+```python
+class LinearRegression::
+    ...생략...
+    def gradientDescent(self, x, y, learning_rate):
+        yhat = self.predict(x) # 출력 계산
+        
+        grad = (yhat - y)/y.shape[0]
+        grad_weight = np.matmul(x.T, grad) 
+        grad_bias = grad.mean()
+        
+        self.weight -= learning_rate * grad_weight
+        self.bias -= learning_rate * grad_bias
+        
+        return yhat
+```
 
 2. train
 
@@ -73,17 +92,7 @@ class LinearRegression:
     def predict(self, x):
         return np.matmul(x, self.weight) + self.bias # 선형 결합으로 출력
     
-    def gradientDescent(self, x, y, learning_rate):
-        yhat = self.predict(x) # 출력 계산
-        
-        grad = y - yhat
-        grad_weight = np.matmul(x.T, grad) / y.shape[0]
-        grad_bias = grad.mean()
-        
-        self.weight += learning_rate * grad_weight
-        self.bias += learning_rate * grad_bias
-        
-        return yhat
+   
         
     def train(self, x, y, epochs=10, learning_rate = 0.001):
         print(f"Training on {x.shape[0]} samples ...")
