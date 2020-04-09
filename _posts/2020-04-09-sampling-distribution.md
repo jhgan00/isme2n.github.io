@@ -22,6 +22,7 @@ $$\sigma_{\bar x} = \frac{\sigma}{\sqrt n}$$
 
 ## 3. Examples
 
+
 모집단|통계량|표집분포
 ---|---|---
 $$N(\mu, \sigma^2)$$|Sample mean $$\bar X$$ from samples size of $$n$$|$$\bar X ~ N(\mu, \frac{\sigma^2}{n})$$ or in case sigma not known, $$\bar X ~ T(\mu, \frac{S^2}{n})$$
