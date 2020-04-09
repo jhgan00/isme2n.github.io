@@ -2,7 +2,7 @@
 layout: post
 title: "[Python] 텐서플로 2.0 입문자 튜토리얼"
 categories: [doc]
-tags: [python, keras, tensorflow]
+tags: [python, ml]
 comments: true
 ---
 

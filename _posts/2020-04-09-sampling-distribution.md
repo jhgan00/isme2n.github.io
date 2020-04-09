@@ -25,6 +25,6 @@ $$\sigma_{\bar x} = \frac{\sigma}{\sqrt n}$$
 
 모집단|통계량|표집분포
 ---|---|---
-$$N(\mu, \sigma^2)$$|Sample mean $$\bar X$$ from samples size of $$n$$|$$\bar X ~ N(\mu, \frac{\sigma^2}{n})$$ or in case sigma not known, $$\bar X ~ T(\mu, \frac{S^2}{n})$$
-$$Bernoulli(p)$$|Sample proportion $$\bar X$$|$$n\barX ~ Binomial(n,p)$$
-Two independent normal:$$N(\mu_1, {\sigma_1}^2), N(\mu_2, {\sigma_2}^2)$$|Difference between two sample means $$\barX_1 - \barX_2$$|$$\barX_1 - \barX_2 ~ N(\mu_1 - \mu_2, \frac{{\sigma_1}^2}{n_1} + \frac{{\sigma_2}^2}{n_2})$$
+$$N(\mu, \sigma^2)$$|Sample mean $$\bar X$$ from samples size of $$n$$|$$\bar X \sim N(\mu, \frac{\sigma^2}{n})$$ or in case sigma not known, $$\bar X \sim T(\mu, \frac{S^2}{n})$$
+$$Bernoulli(p)$$|Sample proportion $$\bar X$$|$$n \bar{X} \sim Binomial(n,p)$$
+Two independent normal:$$N(\mu_1, {\sigma_1}^2), N(\mu_2, {\sigma_2}^2)$$|Difference between two sample means $$\bar{X_1} - \bar{X_2}$$ | $$\bar{X_1} - \bar{X_2} \sim N(\mu_1 - \mu_2, \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2})$$

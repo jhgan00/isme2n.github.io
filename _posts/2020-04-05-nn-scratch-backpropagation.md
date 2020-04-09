@@ -2,7 +2,7 @@
 layout: post
 title: "[Python] NeuralNet from Scratch(2)"
 categories: [doc]
-tags: [python]
+tags: [python, ml]
 comments: true
 ---
 
