@@ -1,6 +1,6 @@
 ---
 layout: tag-blog
-title: stat
+title: Stat
 slug: stat
 category: doc
 menu: false
