@@ -6,7 +6,7 @@ tags: [python]
 comments: true
 ---
 
-넘파이를 사용해서 선형 모형부터 역전파 알고리즘까지 차례차례 구현해봅니다! 간만에 시간이 생겨서 기초적인 신경망 이론을 복습하다가 [바람의 머신러닝](https://www.youtube.com/watch?v=xgT9xp977EI)이라는 강의를 우연히 보게 되었는데, 기존의 수식적인 접근에 더해 계산 그래프를 활용하여 상당히 쉽게 설명을 잘 해주셨습니다. 특히나 좋은 점은 목소리가 굉장히 좋으세요 ㅎㅎ 개인적으로는 역전파 부분만 시청했는데 아예 신경망을 처음 접하시는 분들이라면 모든 강의 다 들어보셔도 좋을 것 같습니다! 
+넘파이를 사용해서 선형 모형부터 역전파 알고리즘까지 차례차례 구현해봅니다! 간만에 시간이 생겨서 기초적인 신경망 이론을 복습하다가 [바람의 머신러닝](https://www.youtube.com/watch?v=xgT9xp977EI)이라는 강의를 우연히 보게 되었는데, 기존의 수식적인 접근에 더해 계산 그래프를 활용하여 상당히 쉽게 설명을 잘 해주셨습니다. 무엇보다도 강사님 목소리가 굉장히 좋으세요 ㅎㅎ 개인적으로는 역전파 부분만 시청했는데 아예 신경망을 처음 접하시는 분들이라면 모든 강의 다 들어보셔도 좋을 것 같습니다! 
 
 ## 1. 회귀모형: 선형 모델과 경사하강
 
@@ -188,7 +188,7 @@ model = SoftmaxClassifier(input_size = x.shape[1], n_labels = 3)
 model.train(x, y, epochs=1500, learning_rate=0.01)
 yhat = model.predict(x)
 
-print(cross_entropy(y, yhat))
+print("Cross Entropy:", cross_entropy(y, yhat))
 
 cm = confusion_matrix(
     y.argmax(axis=1),
@@ -216,8 +216,9 @@ Training on 150 samples ...
 [1200] train_loss: 0.09804614615055966
 [1300] train_loss: 0.09386801611162929
 [1400] train_loss: 0.09041613762520748
-0.08750602639805916
+Cross Entropy: 0.08750602639805916
 [[49  1  0]
  [ 0 41  9]
  [ 0  1 49]]
+
 ```

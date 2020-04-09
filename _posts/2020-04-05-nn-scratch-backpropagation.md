@@ -6,7 +6,7 @@ tags: [python]
 comments: true
 ---
 
-오차 역전파 구현
+이번에는 본격적으로 신경망을 구성하고 오차 역전파를 구현해보겠습니다. 모델은 0과 1을 분류하는 이진 분류기이고, 데이터는 사이킷 런의 유방암 데이터를 사용하였습니다. 손실함수는 역시 크로스 엔트로피를 사용합니다. 
 
 
 ```python
@@ -16,16 +16,10 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
 
 np.random.seed(0)
-```
 
-
-```python
 bc = load_breast_cancer()
 x, y = StandardScaler().fit_transform(bc['data']), bc['target'].reshape((-1,1))
-```
 
-
-```python
 def cross_entropy(ytrue, yhat, eps=1e-10):
     yhat = np.clip(yhat, eps, 1-eps)
     return -(ytrue * np.log(yhat) + (1-ytrue) * np.log(1- yhat)).mean()
