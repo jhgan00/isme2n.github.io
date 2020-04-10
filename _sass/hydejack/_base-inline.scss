@@ -22,9 +22,9 @@ body, main {
     // width: 70em;
     width: 100%;
     min-width: 70em;
-
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+    font-size: $root-font-size-medium;
+    // -webkit-text-size-adjust: 100%;
+    // -ms-text-size-adjust: 100%;
   }  
 }
 
