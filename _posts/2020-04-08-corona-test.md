@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "코로나 관련 논문 소개 및 검정"
+title: "[R] 코로나 관련 논문"
 categories: [blog]
 tags: [r]
 comments: true

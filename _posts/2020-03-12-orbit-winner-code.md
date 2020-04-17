@@ -59,9 +59,6 @@ def plot_category_hist(data, col_list, category):
 plot_category_hist(train, psfMag_col, 'type')
 ```
 
-
-![](/assets/img/docs/output_6_0.png)
-
 ![](/assets/img/docs/output_6_1.png)
 
 ![](/assets/img/docs/output_6_2.png)
