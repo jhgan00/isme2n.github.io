@@ -51,7 +51,7 @@ google_fonts:        Noto Sans KR
 disqus_shortname: derini
 
 # This text will appear in the footer of every page. Markdown enabled.
-copyright:           '&copy; 2017. by isme2n'
+copyright:           '&copy; 2019. by jhgan00'
 
 # Format of the permalinks
 permalink:           pretty
@@ -100,8 +100,8 @@ collections:
 gems:
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-paginate
   - jekyll-redirect-from
+  - jekyll-paginate
 
 exclude:
   - README.md
@@ -142,4 +142,15 @@ defaults:
       sitemap :
         changefreq : daily
         priority : 1.0
-      
+     
+
+plugins: [jekyll-paginate] 
+
+tipue_search:
+   include:
+       pages: false
+       collections: []
+   exclude:
+       files: [search.html, index.html, tags.html]
+       categories: []
+       tags: []

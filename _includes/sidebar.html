@@ -27,6 +27,15 @@
           {% include social.html social=author.social %}
         </div>
       {% endif %}
+
+       <form action="/search">
+          <div class="tipue_search_left">
+            <i class="fas fa-search"></i>
+          </div>
+          <div class="tipue_search_right">
+            <input type="text" name="q" id="tipue_search_input" pattern=".{1,}" title="At least 1 characters" required></div>
+          <div style="clear: both;"></div>
+       </form>
     </header>
   </div>
 </div>
