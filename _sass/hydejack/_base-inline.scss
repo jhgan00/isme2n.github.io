@@ -8,8 +8,6 @@ body, main {
   /* Prevent side-scrolling on mobile */
   position: relative;
   overflow-x: hidden;
-  width: 100%;
-
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -19,9 +17,6 @@ body, main {
     /* Prevent side-scrolling on mobile */
     position: relative;
     overflow-x: hidden;
-    // width: 70em;
-    width: 100%;
-    min-width: 65em;
     font-size: $root-font-size-medium;
     // -webkit-text-size-adjust: 100%;
     // -ms-text-size-adjust: 100%;
