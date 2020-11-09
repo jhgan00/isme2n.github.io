@@ -6,7 +6,11 @@ tags: [python, django, ml]
 comments: true
 ---
 
-요즘은 미래에셋의 2020 금융 빅데이터 페스티벌을 준비하는 중입니다. 보험금 청구건 분류 주제에서 예선을 나름 좋은 성적으로 통과하고, 지금은 본선 보고서 제출까지 마친 상태에요. 이 공모전을 준비하면서 장고를 활용한 대시보드를 제작했는데, 여유가 생긴 김에 관련 코드를 정리해보려고 합니다. 훈련된 모델을 장고 서버에 올린 후 POST 요청이 들어오면 실시간으로 모델의 예측 및 SHAP 해석 결과를 반환하는 것이 목표입니다. 물론 공모전에 주어진 데이터를 그대로 사용할 수는 없으니 캐글의 [Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud) 데이터를 사용합니다.
+요즘은 미래에셋의 2020 금융 빅데이터 페스티벌을 준비하는 중입니다. 보험금 청구건 분류 주제에서 예선을 나름 좋은 성적으로 통과하고, 지금은 본선 보고서 제출까지 마친 상태에요. 이 공모전을 준비하면서 장고를 활용한 대시보드를 제작했는데, 여유가 생긴 김에 관련 코드를 정리해보려고 합니다. 사실 글 자체는 길지 않은데 자잘한 코드가 많아져서 부득이하게 포스팅을 나눴습니다 😅 
+
+공모전에 주어진 데이터를 그대로 사용할 수는 없으니 캐글의 [Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud) 데이터를 사용합니다. 목표는 훈련된 모델을 장고 서버에 올린 후 POST 요청이 들어오면 실시간으로 모델의 예측 및 SHAP 해석 결과를 보여주는 것입니다. 구체적으로 1) POST 요청예 대해 예측을 실행하는 API 만들기 2) 저장된 데이터의 목록 보여주기 3) 개별 예측결과의 디테일(SHAP) 보여주기 세 부분으로 구성됩니다. 각각 장고 `APIView`, `ListView`, `DetailView` 를 통해 구현할 예정입니다. 사실 다른 코드를 찾아보면 클래스 기반 뷰보다는 함수형 뷰를 많이 사용하시는 것 같은데, 저는 아직 함수형 뷰가 익숙하지 않은 것 같아요 ㅎㅎ
+
+
 
 ## 1. 템플릿 선택
 
@@ -14,7 +18,7 @@ comments: true
 <div class="github-card" data-github="app-generator/django-admin-dashboards" data-width="500" data-height="200" data-theme="default"></div>
 <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 
-디자인을 처음부터 전부 다 하기에는 능력이 부족해서 무료 템플릿들을 찾아봤는데, 개인적으로는 위 저장소에서 제공하는 템플릿들이 마음에 들었습니다. 이번에는 [블랙 테마](https://github.com/app-generator/django-dashboard-black)를 사용해보도록 할게요! 저장소를 클론한 후 초기 설정을 하고, 로그인 테스트를 해봅니다. 
+대시보드 디자인을 처음부터 전부 다 하기에는 능력이 부족해서 무료 템플릿들을 찾아봤는데, 개인적으로는 위 저장소에서 제공하는 템플릿들이 마음에 들었습니다. 이번에는 [블랙 테마](https://github.com/app-generator/django-dashboard-black)를 사용해보도록 할게요! 저장소를 클론한 후 초기 설정을 하고, 서버를 실행한 후 로그인 테스트를 해봅니다. 
 
 ```zsh
 git clone https://github.com/app-generator/django-dashboard-black.git
@@ -27,7 +31,13 @@ python manage.py runserver
 ```
 
 
+![](/assets/img/docs/django-login.png)
+
+
+
 ## 2. 예측모델 준비
+
+장고 서버에 머신러닝 모델을 올리는 것이 주된 목표이므로 모델은 간단하게만 만들어줍니다. 카드 거래는 시간 순서로 생성되는 데이터이기 때문에 시간에 따라서 임의로 훈련, 검증, 테스트 데이터셋을 구분했습니다. 훈련된 모델은 서버에서 활용하기 위해 장고 프로젝트의 `models` 디렉토리에 파일로 저장했습니다. 
 
 
 ```python
@@ -109,7 +119,7 @@ RECALL: 0.697
 ============================================================
 ```
 
-장고 서버에 머신러닝 모델을 올리는 것이 주된 목표이므로 모델은 간단하게만 만들어줍니다. 카드 거래는 시간 순서로 생성되는 데이터이기 때문에 시간에 따라서 임의로 훈련, 검증, 테스트 데이터셋을 구분했습니다. 훈련된 모델은 서버에서 활용하기 위해 장고 프로젝트의 `models` 디렉토리에 파일로 저장했습니다. 
+
 
 
 ## 3. REST API
@@ -237,7 +247,7 @@ Probability 0.01
 Probability 0.01
 ```
 
-정상적인 응답이 돌아오는 것을 확인한 후 DB 쉘을 열어서 쿼리를 날려봅니다. 데이터가 정상적으로 등록된 것을 확인할 수 있습니다. 
+정상적인 응답이 돌아오는 것을 확인한 후 DB 쉘을 열어서 쿼리를 날려봅니다. 역시 데이터가 정상적으로 등록된 것을 확인할 수 있습니다. 
 
 ```zsh
 python manage.py dbshell
@@ -256,7 +266,7 @@ sqlite> SELECT TIME, AMOUNT, PRED FROM APP_CARDTRANSACTION;
 sqlite> DELETE FROM APP_CARDTRANSACTION;
 ```
 
-API가 잘 동작하는 것을 확인했으므로 시간을 절약하기 위해 한꺼번에 DB에 입력하겠습니다. `to_sql` 메소드에서 테이블 이름을 대문자로 입력하는 경우에 `append` 파라미터가 제대로 작동하지 않는 것 같습니다. 테이블 이름에는 소문자를 사용해주세요!
+API가 잘 동작하는 것을 확인했으므로 시간을 절약하기 위해 한꺼번에 DB에 입력하겠습니다 😅 `to_sql` 메소드에서 테이블 이름을 대문자로 입력하는 경우에 `append` 파라미터가 제대로 작동하지 않는 것 같습니다. 테이블 이름에는 소문자를 사용해주세요!
 
 ```python
 import sqlite3
