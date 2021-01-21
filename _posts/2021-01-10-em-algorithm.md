@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[ML/Stat] EM Algorithm for latent variable models"
+title: "[ML/Stat] EM Algorithm for latent variable models (1)"
 categories: doc
 tags: [ml, stat]
 comments: true
@@ -17,30 +17,10 @@ use_math: true
 
 # 1. EM Algorithm for latent variable models
 
-EM은 관측되지 않은 잠재변수가 존재할 때 확률분포의 최대가능도 파라미터를 찾는 알고리즘이다. 솔직히 이렇게 들어서는 잘 감이 오지 않는다. 예시를 통해서 알아보자. 다음과 같은 1차원 데이터의 분포를 가정한다. 하나의 분포를 통해서 설명할 수도 있겠지만, 두 개의 가우시안이 혼합된 분포로 설명하는 편이 더 나아 보인다. $n$ 개의 데이터가 존재하고 확률변수 $X, Z$가 각각 알려진 값과 숨겨진 클러스터(가우시안 분포)에 대응한다고 해보자. $X$는 임의의 실수 값을 가지며 $Z$ 는 0 또는 1의 값을 가진다. 
+EM은 관측되지 않은 잠재변수가 존재할 때 확률분포의 최대가능도 파라미터를 찾는 알고리즘이다. 솔직히 이렇게 들어서는 잘 감이 오지 않는다. 예시를 통해서 알아보자. 다음과 같은 1차원 데이터의 분포를 가정한다. 하나의 분포를 통해서 설명할 수도 있겠지만, 두 개의 가우시안이 혼합된 분포로 설명하는 편이 더 나아 보인다. $n$ 개의 데이터가 존재하고 확률변수 $X, Z$가 각각 알려진 값과 숨겨진 클러스터(가우시안 분포)에 대응한다고 해보자. $X$는 임의의 실수 값을 가지며 $Z$ 는 0 또는 1의 값을 가진다. 아래 그림은 $N(1, 1^2)$ 의 샘플 100개, $N(10, 3^2)$ 의 샘플 50개로 이루어진 데이터의 분포이다.
 
-
-```python
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-```
-
-
-```python
-np.random.seed(2021)
-
-x1 = np.random.normal(1, 1, 100)
-x2 = np.random.normal(10, 3, 50)
-x = np.append(x1, x2)
-np.random.shuffle(x)
-
-sns.displot(x, kind="kde", rug=True)
-```
-
-
-
-![png](/assets/img/docs/output_4_1.png)
+    
+![png](/assets/img/docs/output_4_0.png)
 
 
 완전한 데이터(complete data) $\{(x_1, z_1), (x_1, z_1), \space ... \space, (x_n, z_n)\}$ 가 존재한다면 두 개의 분포에 대해서 각각 MLE를 추정할 수 있다. 즉 어떤 데이터가 어떤 가우시안 분포로부터 나왔는지를 아는 상태이다. 하지만 실제로 가진 데이터는 $\{x_1, x_2, \space ... \space , x_n\}$ 뿐이다. 각각이 어떤 분포로부터 나왔는지를 알 수 없는 것이다. 이를 불완전한 데이터(incomplete data)라고 부른다. $X$ 와 $Z$의 결합확률분포 모델이 파라미터 $\theta$를 가진다고 하면 모델을 $p(x, z \vert \theta)$와 같이 표현할 수 있다.
@@ -69,6 +49,7 @@ $$
 \underbrace{ \sum_{z} q(z) \left[ \log \frac{p(x, z \vert \theta)}{q(z)}) \right] }_{ ELBO \space \mathcal{L}(q, \theta) } \quad \text{expectation of log, by Jensen's inequality}
 \end{align}
 $$
+
 
 $$
 \therefore \text{For any q(z), } \log p(x \vert \theta) \geq \mathcal{L}(q, \theta) 
@@ -156,111 +137,6 @@ $$
 $$
 
 
-
-# 4. Mixture of Gaussians
-
-마지막으로, 위에서 가우시안 혼합 모형의 모수를 실제로 추론해보자. 각 클러스터의 비율과 모수를 나름대로 가깝게 추론해내는 것을 볼 수 있다. ELBO의 전역 최대가 결국은 로그우도의 전역 최대와 같기는 하지만, 알고리즘이 항상 전역 최대를 찾아갈 수 있는가는 다른 문제이다. EM 알고리즘은 수렴이 보장되지만 그것이 전역 최대라는 보장이 없다. 즉 초기값을 어떻게 설정하는지에 따라 알고리즘의 수렴 결과가 달라질 수 있다. 참고한 앤드류 응 교수의 강의에서는 K-Means 알고리즘을 예시도 랜덤 센트로이드에서 시작하기보다 데이터에서 초기값을 뽑아내는 것을 추천한다. 이 코드에서도 유사한 방법을 따랐다.
-
-
-```python
-np.random.seed(2021)
-
-x1 = np.random.normal(1, 1, 100)
-x2 = np.random.normal(10, 3, 50)
-x = np.append(x1, x2)
-np.random.shuffle(x)
-x = x.reshape((-1, 1))
-```
-
-
-```python
-# 정규분포의 pdf
-def pdf(x, mean, std):
-    return np.exp(-((x-mean)**2)/(2 * (std**2))) / (std * (2 * np.pi)**0.5)
-```
-
-
-```python
-# Evidence 의 로그우도
-def log_likelihood(x, mu, sigma, p):
-    return np.log((pdf(x, mu, sigma) * p).sum(axis=1)).sum().round(4)
-```
-
-## 4.1. Choose initial $\theta^{old}$
-
-
-```python
-p = np.array([[0.5, 0.5]], dtype=np.float64)
-mu = np.random.choice(x.flatten(), 2, replace=True)[np.newaxis, :]
-sigma = np.array([[np.std(x), np.std(x)]], dtype=np.float64)
-logL = log_likelihood(x, mu, sigma, p).round(4)
-eps = 1e-6
-```
-
-## 4.2. Expectation - Maximization
-
-
-```python
-density = pdf(x, mu, sigma)
-dp = density * p
-pz_x = (dp / dp.sum(axis=1, keepdims=True)).sum(axis=0, keepdims=True)
-```
-
-
-```python
-row_format = "{:^15}|{:^15}|{:^15}|{:^15}|{:^15}|{:^15}|{:^15}|{:^15}"
-print(row_format.format("iteration", "log-likelihood", "P(Z=0)", "P(Z=1)", "mu_1", "mu_2", "sigma_1", "sigma_2"))
-print(row_format.format("=" * 15, "=" * 15, "=" * 15, "=" * 15, "=" * 15, "=" * 15, "=" * 15, "=" * 15))
-
-
-for i in range(100):
-    
-    density = pdf(x, mu, sigma)
-    dp = density * p
-    pz_x = (dp / dp.sum(axis=1, keepdims=True))
-    
-    p = pz_x.mean(axis=0)[np.newaxis, :].round(4)
-    sigma = np.sqrt((pz_x * (x - mu)**2).sum(axis=0) / pz_x.sum(axis=0))[np.newaxis, :].round(4)
-    mu = ((x * pz_x).sum(axis=0) / pz_x.sum(axis=0))[np.newaxis, :].round(4)
-    
-    logL_new = log_likelihood(x, mu, sigma, p).round(4)
-    gain = logL_new - logL
-    
-    assert gain >= 0
-    
-    print(row_format.format(i+1, logL, p[0][0], p[0][1], mu[0][0], mu[0][1], sigma[0][0], sigma[0][1]))
-    
-    if gain < eps:
-        
-        
-        print(row_format.format("=" * 15, "=" * 15, "=" * 15, "=" * 15, "=" * 15, "=" * 15, "=" * 15, "=" * 15))
-        print(row_format.format("-", logL, p[0][0], p[0][1], mu[0][0], mu[0][1], sigma[0][0], sigma[0][1]))
-        
-        print("\nAlgorithm Converged!")
-        
-        break
-    
-    logL = logL_new
-```
-
-```
-       iteration   |log-likelihood |    P(Z=0)     |    P(Z=1)     |     mu_1      |     mu_2      |    sigma_1    |    sigma_2    
-    ===============|===============|===============|===============|===============|===============|===============|===============
-           1       |   -459.966    |    0.5786     |    0.4214     |    1.7004     |    8.0079     |    2.6411     |    5.1511     
-           2       |   -418.9214   |    0.5904     |    0.4096     |    1.3054     |     8.759     |    1.5495     |    4.7224     
-           3       |   -382.1583   |    0.6168     |    0.3832     |     1.102     |    9.5997     |    1.0135     |    4.0415     
-           4       |   -360.4603   |    0.6368     |    0.3632     |    1.0722     |    10.1216    |    0.9333     |     3.429     
-           5       |   -356.5254   |    0.6489     |    0.3511     |    1.0748     |    10.4287    |    0.9394     |    3.0157     
-           6       |   -354.8216   |    0.6553     |    0.3447     |    1.0845     |    10.5818    |    0.9495     |    2.8023     
-           7       |   -354.3142   |    0.6576     |    0.3424     |    1.0901     |    10.6362    |    0.9549     |    2.7281     
-           8       |   -354.2459   |    0.6583     |    0.3417     |    1.0921     |    10.6517    |     0.957     |     2.708     
-           9       |   -354.2402   |    0.6585     |    0.3415     |    1.0926     |    10.6558    |    0.9576     |    2.7028     
-          10       |   -354.2398   |    0.6585     |    0.3415     |    1.0928     |    10.6569    |    0.9578     |    2.7015     
-    ===============|===============|===============|===============|===============|===============|===============|===============
-           -       |   -354.2398   |    0.6585     |    0.3415     |    1.0928     |    10.6569    |    0.9578     |    2.7015     
-    
-    Algorithm Converged!
-```
 
 ## 참고자료
 
