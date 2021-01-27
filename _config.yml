@@ -37,7 +37,7 @@ font:                "'Noto Sans KR', 'Sans-serif'"
 
 # The string encoding what fonts to fetch from Google Fonts.
 # See: https://qwtel.com/hydejack/docs/configuration/
-google_fonts:        Noto Sans KR
+google_fonts:        Noto Sans KR, Ubuntu Mono
 
 # If you do not use a Google Fonts, uncomment the line below
 # no_google_fonts:     true

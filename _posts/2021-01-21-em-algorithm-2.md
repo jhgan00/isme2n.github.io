@@ -7,13 +7,7 @@ comments: true
 use_math: true
 ---
 
-이번에는 EM 알고리즘을 통해서 잠재변수 모델을 실제로 추정하고, 클러스터링을 시행봅니다 😀 K-means 클러스터링의 soft assignment 버전이라고 생각하시면 편할 것 같습니다! 아래 자료들을 참고하여 작성한 코드입니다. 아이리스 데이터셋에서 사용한 `plus_plus` 함수는 직접 작성한 것이 아니며, 아래 [`centroid_initialization.py`](https://gist.github.com/mmmayo13/3d5c2b12218dfd79acc27c64b3b7dd86#file-centroid_initialization-py) 의 코드를 사용하였습을 미리 밝힙니다!
-
-- [Lecture 14 - Expectation-Maximization Algorithms \| Stanford CS229: Machine Learning (Autumn 2018)](https://www.youtube.com/watch?v=rVfZHWTwXSA&t=2192s)
-- [27. EM Algorithm for Latent Variable Models](https://www.youtube.com/watch?v=lMShR1vjbUo)
-    - [Lecture Slides](https://davidrosenberg.github.io/mlcourse/Archive/2017Fall/Lectures/13c.EM-algorithm.pdf)
-- [CSC 411: Lecture 13: Mixtures of Gaussians and EM](http://nlp.chonbuk.ac.kr/BML/slides_uoft/13_mog.pdf)
-- [centroid_initialization.py](https://gist.github.com/mmmayo13/3d5c2b12218dfd79acc27c64b3b7dd86#file-centroid_initialization-py)
+이번에는 EM 알고리즘을 통해서 잠재변수 모델을 실제로 추정하고, 클러스터링을 시행봅니다 😀 K-means 클러스터링의 soft assignment 버전이라고 생각하시면 편할 것 같습니다! 참고한 자료의 목록은 가장 아래에 있습니다.
 
 ## 1. Mixture of Gaussians
 
@@ -168,7 +162,7 @@ for epoch in range(1, 101):
 
 # 2. Iris Dataset 
 
-이번에는 아이리스 데이터로 실험해보자. 다변량 데이터이기 다변량 정규분포에 대한 이해가 조금 필요하다. 물론 수식만 읽을 수 있으면 왜 되는지는 몰라도 구현할 수는 있다. 이번에는 초기화를 대충 하지 않고 Kmeans++ 의 방법을 사용했다. 초기화 함수인 `plus_plus` 는 By Matthew Mayo의 [GIST](https://gist.github.com/mmmayo13/3d5c2b12218dfd79acc27c64b3b7dd86#file-centroid_initialization-py) 에서 가져왔다. 그 외에는 전부 직접 작성했다.
+이번에는 아이리스 데이터로 실험해보자. 다변량 데이터이기 다변량 정규분포에 대한 이해가 조금 필요하다. 물론 수식만 읽을 수 있으면 왜 되는지는 몰라도 구현할 수는 있다. 이번에는 초기화를 대충 하지 않고 Kmeans++ 의 방법을 사용했다. 초기화 함수인 `plus_plus` 는 Matthew Mayo의 [GIST](https://gist.github.com/mmmayo13/3d5c2b12218dfd79acc27c64b3b7dd86#file-centroid_initialization-py) 에서 가져왔다. 그 외에는 전부 직접 작성했다.
 
 
 ```python
