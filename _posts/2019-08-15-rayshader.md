@@ -102,7 +102,7 @@ LonLat = roadmap %>%
   raster::projectRaster(crs="+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
 
 bb = attr(gmap, "bb")
-gmap_extent = extent(bb$ll.lon, bb$ur.lon, bb$ll.lat, bb$ur.lat)
+gmap_extent = extent(bb\\( ll.lon, bb \\)ur.lon, bb\\( ll.lat, bb \\)ur.lat)
 extent(LonLat) = gmap_extent
 
 LonLat %>%

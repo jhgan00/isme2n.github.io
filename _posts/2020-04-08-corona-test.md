@@ -12,7 +12,7 @@ comments: true
 > data = matrix(c(1188, 2506, 715, 1173), byrow=T, ncol=2)
 > dimnames(data) = list(group=c("control", "patient"), type=c("a","others"))
 > prop = prop.test(data)
-> odds = prop$estimate/(1 - prop$estimate)
+> odds = prop\\( estimate/(1 - prop \\)estimate)
 > theta= odds[2]/odds[1]
 > ASE = sum(1/data) %>% sqrt
 > logtheta.CI = log(theta) + c(-1, 1) * 1.96 * ASE

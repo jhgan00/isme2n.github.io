@@ -903,7 +903,7 @@ def plot_history(history):
 
     plt.subplot(2,1,2)
     plt.xlabel('Epoch')
-    plt.ylabel('Mean Square Error [$MPG^2$]')
+    plt.ylabel('Mean Square Error [\\( MPG^2 \\)]')
     plt.plot(hist['epoch'], hist['mse'],
            label='Train Error')
     plt.plot(hist['epoch'], hist['val_mse'],

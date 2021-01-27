@@ -101,7 +101,7 @@ model.save_model("models/classifier", num_iteration = model.best_iteration)
 
 
 ```
-$ python train.py
+\\(  python train.py
 Training until validation scores don't improve for 100 rounds
 [100]   valid_0's binary_logloss: 0.00505178
 [200]   valid_0's binary_logloss: 0.00394079
@@ -234,7 +234,7 @@ for i in range(10):
 ```
 
 ```zsh
-$ python apitest.py
+ \\) python apitest.py
 Probability 0.01
 Probability 0.01
 Probability 0.01

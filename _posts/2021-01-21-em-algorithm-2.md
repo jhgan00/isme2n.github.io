@@ -17,7 +17,7 @@ use_math: true
 
 ## 1. Mixture of Gaussians
 
-지난번 포스팅에서 예를 들었던 가우시안 혼합 모형의 모수를 실제로 추론해보자. [앤드류 응 교수의 강의](https://www.youtube.com/watch?v=rVfZHWTwXSA&t=2192s) 31분 쯤부터를 주로 참고해서 만들었다. `pdf` 와 `log_likelihood` 는 각각 일변량 정규분포의 밀도와 로그우도 $\log p(\mathbf{x})$를 계산한다.
+지난번 포스팅에서 예를 들었던 가우시안 혼합 모형의 모수를 실제로 추론해보자. [앤드류 응 교수의 강의](https://www.youtube.com/watch?v=rVfZHWTwXSA&t=2192s) 31분 쯤부터를 주로 참고해서 만들었다. `pdf` 와 `log_likelihood` 는 각각 일변량 정규분포의 밀도와 로그우도 \\(log p(\mathbf{x})\\)를 계산한다.
 
 
 ```python
@@ -73,7 +73,7 @@ plt.show()
     
 
 
-### 1.1. Choose initial $\theta^{old}$
+### 1.1. Choose initial \\( \theta^{old} \\)
 
 EM 알고리즘은 수렴이 보장되지만 그것이 전역 최대라는 보장이 없다. 즉 초기값을 어떻게 설정하는지에 따라 알고리즘의 수렴 결과가 달라질 수 있다. ELBO의 전역 최대가 결국은 로그우도의 전역 최대와 같기는 하지만, 알고리즘이 항상 전역 최대를 찾아갈 수 있는가는 다른 문제이다. 그래서 K-means++ 와 같이 서로 충분히 멀리 떨어진 점들을 선택하기 위한 기법들이 연구되어왔다. 이번 예제는 간단한 인조 데이터이므로 대충 초기화해보자. 찾아야 할 파라미터는 두 정규분포의 평균과 분산, 그리고 클러스터 할당의 혼합계수(mixing coefficient) 이다. 평균은 각각 최대값과 최소값, 분산은 데이터 전체를 통해 구한 분산으로 대충 초기화했다. 혼합계수는 0.5씩으로 동일하게 초기화했다.
 
@@ -100,7 +100,7 @@ q^{\ast}(z) = p(Z=z \vert x, \theta) \\
 \end{align}
 $$
 
-베이즈 룰을 사용하여 $q(z)$ 를 위의 $\gamma^{(c)}$ 처럼 나타낼 수 있다. $\gamma^{(z)}$ 는 하나의 데이터가 클러스터 $z$ 에 속할 조건부확률을 나타낸다. 이를 이용해서 $\log p(\mathbf{x})$ 를 최대화하는 파라미터를 구하면 다음과 같다. 아래첨자가 데이터, 위첨자가 클러스터를 나타낸다. 미분으로 MLE를 구하는 자세한 과정은 [여기](http://nlp.chonbuk.ac.kr/BML/slides_uoft/13_mog.pdf)를 참고하면 된다. 
+베이즈 룰을 사용하여 \\( q(z) \\) 를 위의 \\( \gamma^{(c)} \\) 처럼 나타낼 수 있다. \\( \gamma^{(z)} \\) 는 하나의 데이터가 클러스터 \\( z \\) 에 속할 조건부확률을 나타낸다. 이를 이용해서 \\( \log p(\mathbf{x}) \\) 를 최대화하는 파라미터를 구하면 다음과 같다. 아래첨자가 데이터, 위첨자가 클러스터를 나타낸다. 미분으로 MLE를 구하는 자세한 과정은 [여기](http://nlp.chonbuk.ac.kr/BML/slides_uoft/13_mog.pdf)를 참고하면 된다. 
 
 $$
 \begin{align}
@@ -283,7 +283,7 @@ xcols = iris.get("feature_names")  # 4 X 150 행렬
 y = iris.get("target")  # 4 X 150 행렬
 ```
 
-### 1.1. Choose initial $\theta^{old}$
+### 1.1. Choose initial \\( \theta^{old} \\)
 
 역시 혼합계수, 클러스터별 평균, 공분산행렬을 초기화해야 한다. 혼합계수와 공분산행렬은 이전 예제에서와 같은 방식으로 초기화하였다. 평균은 위에서 언급한대로 Kmeans++ 의 방식으로 초기화하였다.
 

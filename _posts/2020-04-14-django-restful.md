@@ -13,12 +13,12 @@ comments: true
 기본 장고 패키지와 별도로 `djangorestframework` 패키지를 설치해주어야 합니다. 이후 원하는 위치에 프로젝트와 앱 하나를 만들고 migrate를 실행해줍니다. 저는 exchange 프로젝트 안에 api라는 앱을 생성하였습니다. 최종적으로는 사용자의 요청에 따라 환율 예측값을 반환하는 RESTful API를 구상하고 있는데, 우선은 환율 정보만 담아서 반환해보도록 하려고 합니다. 다음으로 superuser를 생성하고, `settings.py` 파일에 우리가 만든 앱과 `rest_framework`를 추가해줍니다. 필요하다면 다른 설정도 같이 해줍니다.
 
 ```bash
-$ pip install djangorestframework
-$ django-admin startproject exchange
-$ cd excange
-$ django-admin startapp api
-$ python manage.py migrate
-$ python manage.py createsuperuser
+\\(  pip install djangorestframework
+ \\) django-admin startproject exchange
+\\(  cd excange
+ \\) django-admin startapp api
+\\(  python manage.py migrate
+ \\) python manage.py createsuperuser
 ```
 
 ```python
@@ -51,8 +51,8 @@ class Exchange(models.Model):
 ```
 
 ```bash
-$ python manage.py makemigrations
-$ python manage.py migrate
+\\(  python manage.py makemigrations
+ \\) python manage.py migrate
 ```
 
 모델이 완성되었으니 모델에 데이터를 채워넣겠습니다. 아래 스크립트를 통해 한국수출입은행 2019년 1월부터 현재까지의 데이터를 받아와 db에 채워넣었습니다. 판다스와 sqlite3의 조합으로 손쉽게 데이터프레임을 db로 옮길 수 있습니다.

@@ -80,10 +80,10 @@ comments: true
             <a class="page-link" href="{{ paginator.num_pages }}" id="btn_end_link"><i class="fas fa-angle-double-right"></i></a>
         </li>
     <script>
-        $(".page-link").click(function (event) {
+        \\( (".page-link").click(function (event) {
             event.preventDefault();
-            var page_n = $(this).attr('href');
-            var page_end = $('#btn_end_link').attr('href');
+            var page_n =  \\)(this).attr('href');
+            var page_end = \\( ('#btn_end_link').attr('href');
 
             if(page_n == '1'){
                 var prev_page = 1;
@@ -99,7 +99,7 @@ comments: true
             }
 
             // ajax
-            $.ajax({
+             \\).ajax({
                 type: "POST",
                 url: "{% url 'tr-list' %}", // name of url
                 data: {
@@ -108,12 +108,12 @@ comments: true
                 },
                 success: function (resp) {
                     //loop
-                    $("[id^=btn]").removeClass("active")
-                    $('#btn_' + page_n).addClass("active")
-                    $('#btn_prev_link').attr("href", prev_page)
-                    $('#btn_next_link').attr("href", next_page)
-                    $('#features').html('')
-                    $.each(resp.results, function (i, val) {
+                    \\( ("[id^=btn]").removeClass("active")
+                     \\)('#btn_' + page_n).addClass("active")
+                    \\( ('#btn_prev_link').attr("href", prev_page)
+                     \\)('#btn_next_link').attr("href", next_page)
+                    \\( ('#features').html('')
+                     \\).each(resp.results, function (i, val) {
                         $('#features').append(
                             '<tr style = "cursor:pointer;" onClick = " location.href=\'/tr-detail/' + val.id + '\' ">' +
                                 '<td>' + val.id + '</td>' +
