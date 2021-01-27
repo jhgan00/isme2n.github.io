@@ -32,9 +32,9 @@ def mse(y, yhat):
 그러면 선형모형 클래스를 만들어 입력을 받아서 출력을 내보내는 기능까지만 구현해보겠습니다. `__init__` 메소드에서는 인스턴스를 생성하면 입력 데이터의 사이즈를 받아서 가중치 행렬과 편향을 초기화합니다. 가중치는 랜덤으로, 편향은 0으로 초기화하였습니다. 다음으로 예측을 내보내는 `predict` 메소드를 구현해봅니다. 예측은 단순히 입력과 가중치의 곱에 편향을 더해서 내보내부는 선형 결합입니다. 아직 가중치와 편향의 업데이트를 실행하는 경사하강 알고리즘은 구현하지 않았습니다.
 
 
-
-$$y = x^T w + b$$
-
+$$
+y = x^T w + b \\
+$$
 
 
 ```python
@@ -52,9 +52,10 @@ class LinearRegression:
 
 출력을 내보내는 다중회귀모형이 간단하게 구현되었습니다. 이제 가중치 업데이트를 위한 경사하강을 구현해봅시다. 선형회귀 클래스 안에 경사하강을 위한 gradientDescent 메소드를 별도로 구현하였습니다. 학습을 위해 필요한 데이터와 학습률을 인자로 받습니다. 먼저 출력 `yhat`을 계산해줍니다. 다음으로 가중치 업데이트를 위한 미분을 계산합니다. 체인 룰을 사용해서 간단하게 계산해줄 수 있습니다. 이후 역전파를 다룰 때에도 체인 룰은 계속 등장합니다. 개별 데이터마다 미분을 계산하는 것이 아니라 행렬을 사용해서 한번에 계산한 후 업데이트 해줍니다.
     
-$$ L = \frac{1}{2} (y-\hat{y})^2, \space \frac{L}{\partial \hat{y}} = -(y-\hat{y})$$
-
-$$\frac{\partial \hat{y}}{\partial w_i} = x_i, \space \frac{\partial \hat{y}}{\partial b} = 1$$
+$$
+L = \frac{1}{2} (y-\hat{y})^2, \space \frac{L}{\partial \hat{y}} = -(y-\hat{y}) \\
+\frac{\partial \hat{y}}{\partial w_i} = x_i, \space \frac{\partial \hat{y}}{\partial b} = 1
+$$
 
 ```python
 class LinearRegression::
@@ -134,7 +135,9 @@ def cross_entropy(y, yhat):
 
 이제 입력을 받아서 소프트맥스 출력을 내보내는 클래스를 구현해봅시다. 소프트맥스는 각 클래스별 확률을 출력해야 하므로 우선 가중치 행렬을 $$(input, \space output)$$로 확장해줍니다. 이렇게 해서 데이터마다 클래스 각각의 확률을 출력할 수 있습니다. 역시 가중치는 랜덤으로, 편향은 0으로 초기화해주었습니다. 
 
-$$z_i = x^T c_i(W), \space p_i = \frac{e^{z_i}}{\sum_j e^{z_j}}$$
+$$
+z_i = x^T c_i(W), \space p_i = \frac{e^{z_i}}{\sum_j e^{z_j}} \\
+$$
 
 ```python
 class SoftmaxClassifier:
@@ -154,9 +157,10 @@ class SoftmaxClassifier:
     
 출력값과 오차 함수가 변경되었으므로 미분도 그에 맞게 변경해줍니다. 이후 파라미터를 업데이트해주는 과정은 모두 같습니다. 크로스 엔트로피 에러와 소프트맥스 함수의 조합은 상당히 간단한 미분 결과를 만들어줍니다. 역시 개별 데이터마다 연산을 반복하는 것이 아니라 행렬로 처리한다는 점을 주의해주시면 됩니다.
 
-$$L = -\sum y_i ln p_i = -y ln p$$
-
-$$\frac{\partial p}{\partial z} = p(1-p), \space \frac{\partial L}{\partial p} = -\frac{y}{p}, \space \frac{\partial L}{\partial z} = -y(1-p)$$
+$$
+L = -\sum y_i \ln p_i = -y ln p \\
+\frac{\partial p}{\partial z} = p(1-p), \space \frac{\partial L}{\partial p} = -\frac{y}{p}, \space \frac{\partial L}{\partial z} = -y(1-p)
+$$
 
 ```python
 class SoftmaxClassifier:
